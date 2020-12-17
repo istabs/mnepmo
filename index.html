@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>
+		MNE-PMO Gantts
+	</title>
+
+	<link type="text/css" rel="stylesheet" href="styles.css">
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css">
+
+</head>
+
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-analytics.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-firestore.js"></script>
+
+<script type="text/javascript" src="configuration.js"></script>
+<script type="text/javascript" src="uiconfiguration.js"></script>
+
+<script type="text/javascript">
+	firebase.initializeApp(firebaseConfig);
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+	ui.start('#firebaseui-auth-container', uiConfig)
+</script>
+
+<script type="text/javascript">
+	initApp = function () {
+		firebase.auth().onAuthStateChanged(function (user) {
+			document.getElementById('loader').textContent = '';
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var uid = user.uid;
+				var phoneNumber = user.phoneNumber;
+				var providerData = user.providerData;
+				user.getIdToken().then(function (accessToken) {
+					document.getElementById('sign-in-status').textContent = 'ativo';
+					document.getElementById('email').textContent = email;
+					document.getElementById('estado').textContent = emailVerified;
+				});
+			} else {
+				document.getElementById('sign-in-status').textContent = 'inativo';
+				document.getElementById('email').textContent = '---';
+				document.getElementById('estado').textContent = '---';
+		}
+		}, function (error) {
+			console.log(error);
+		});
+	};
+
+	window.addEventListener('load', () => initApp());
+</script>
+
+<body>
+	<h1>MNE-PMO</h1>
+	<div id="firebaseui-auth-container"></div>
+	<p><div id="loader">A carregar...</div></p>
+	<p>O estado de sessão é <span id="sign-in-status"></span>.</p>
+	<div id="sign-in"></div>
+	<p>Detalhes:</p>
+	<ul>
+		<li>email: <span id="email"></span></li>
+		<li>estado: <span id="estado"></span></li>
+	</ul>
+	<pre id="account-details"></pre>
+	<button onclick="location.href = 'retrieve.html';" autofocus>Continuar</button>
+</body>
+
+</html>
