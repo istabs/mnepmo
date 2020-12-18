@@ -32,7 +32,7 @@
 	function statusFlip() {
 		if (document.getElementById('loginbtn').textContent === 'Logout'){
 			document.getElementById('loginbtn').textContent = 'Login';
-			firebaseui.auth().signOut();
+			firebase.auth().signOut();
 		}
 	}
 
