@@ -30,16 +30,38 @@ crossorigin="anonymous"></script>
 <script type="text/javascript" src="ggltools.js"></script>
 
 <script type="text/javascript">
-	var uiLabels = {
-		login: 'Login',
-		logout: 'Logout',
-	}
-</script>
-
-<script type="text/javascript">
 	firebase.initializeApp(firebaseConfig);
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#firebaseui-auth-container', uiConfig)
+</script>
+
+<script type="text/javascript">
+	// Menu stuff
+
+	function toggle(menuItem) {
+		switch (menuItem) {
+			case 'login':
+				document.getElementById('Login').display = "none";
+				document.getElementById('Logout').display = "block";
+				break;
+			case 'logout':
+				document.getElementById('Logout').display = "none";
+				document.getElementById('Login').display = "block";
+				break;
+			default:
+				break;
+		}
+	}
+
+	function doLogin() {
+		console.log('login');
+		toggle('login');
+	}
+
+	function doLogout() {
+		console.log('logout')
+		toggle('logout');
+	}
 </script>
 
 <script type="text/javascript">
