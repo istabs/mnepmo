@@ -46,7 +46,7 @@
 				// User is signed in.
 				ui.reset();
 				//document.getElementById('firebaseui-auth-container').style.display = "none";
-				document.getElementById('#loginbtn').textContent = 'Logout'
+				document.getElementById('loginbtn').textContent = 'Logout'
 				var displayName = user.displayName;
 				var email = user.email;
 				var emailVerified = user.emailVerified;
@@ -62,7 +62,7 @@
 			} else {
 				// User is not signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "block";
-				document.getElementById('#loginbtn').textContent = 'Login'
+				document.getElementById('loginbtn').textContent = 'Login'
 
 				document.getElementById('firebaseui-auth-container').innerHTML = "";
 				document.getElementById('sign-in-status').textContent = 'inativo';
@@ -87,7 +87,7 @@
 				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
 			</li>
 			<li class="nav-item">
-				<a id="#loginbtn" class="nav-link" onclick="statusFlip()"></a>
+				<a id="loginbtn" class="nav-link" onclick="statusFlip()"></a>
 			</li>
 		</ul>
 	</nav>
