@@ -30,14 +30,18 @@
 	ui.start('#firebaseui-auth-container', uiConfig)
 
 	function statusFlip() {
-		if (document.getElementById('loginbtn').textContent === 'Logout'){
-			document.getElementById('loginbtn').textContent = 'Login';
-			firebase.auth().signOut();
-		} else {
-			ui.start('#firebaseui-auth-container', uiConfig);
+		switch (document.getElementById('loginbtn').textContent) {
+			case 'Logout':
+				firebase.auth().signOut();
+				document.getElementById('loginbtn').textContent = 'Login';
+				break;
+			case 'Login':
+			default:
+				ui.start('#firebaseui-auth-container', uiConfig);
+				document.getElementById('loginbtn').textContent = 'Logout';
+				break;
 		}
 	}
-
 </script>
 
 <script type="text/javascript">
@@ -47,7 +51,6 @@
 			if (user) {
 				// User is signed in.
 				ui.reset();
-				//document.getElementById('firebaseui-auth-container').style.display = "none";
 				document.getElementById('loginbtn').textContent = 'Logout'
 				var displayName = user.displayName;
 				var email = user.email;
@@ -57,17 +60,13 @@
 				var phoneNumber = user.phoneNumber;
 				var providerData = user.providerData;
 				user.getIdToken().then(function (accessToken) {
-					document.getElementById('sign-in-status').textContent = 'ativo';
 					document.getElementById('email').textContent = email;
 					document.getElementById('estado').textContent = emailVerified;
 				});
 			} else {
 				// User is not signed in.
-				//document.getElementById('firebaseui-auth-container').style.display = "block";
 				document.getElementById('loginbtn').textContent = 'Login'
-
 				document.getElementById('firebaseui-auth-container').innerHTML = "";
-				document.getElementById('sign-in-status').textContent = 'inativo';
 				document.getElementById('email').textContent = '---';
 				document.getElementById('estado').textContent = '---';
 			}
@@ -98,7 +97,6 @@
 	<p>
 		<div id="loader">A carregar...</div>
 	</p>
-	<p>O estado de sessão é <span id="sign-in-status"></span>.</p>
 	<div id="sign-in"></div>
 	<p>Detalhes:</p>
 	<ul>
