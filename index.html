@@ -41,12 +41,12 @@ crossorigin="anonymous"></script>
 	function toggle(menuItem) {
 		switch (menuItem) {
 			case 'login':
-				document.getElementById('login').display = "none";
-				document.getElementById('logout').display = "block";
+				$("#login").hide();
+				$("#logout").show();
 				break;
 			case 'logout':
-				document.getElementById('logout').display = "none";
-				document.getElementById('login').display = "block";
+				$("#login").hide();
+				$("#logout").show();
 				break;
 			default:
 				break;
