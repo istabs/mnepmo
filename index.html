@@ -45,8 +45,8 @@ crossorigin="anonymous"></script>
 				$("#logout").show();
 				break;
 			case 'logout':
-				$("#login").hide();
-				$("#logout").show();
+				$("#login").show();
+				$("#logout").hide();
 				break;
 			default:
 				break;
@@ -103,7 +103,8 @@ crossorigin="anonymous"></script>
 	}
 
 	function initApp() {
-		includeHTML()
+		includeHTML();
+		toggle('login');
 		return;
 		document.getElementById('loginbtn').addEventListener('click', function () {
 			firebase.auth().signOut();
