@@ -37,7 +37,7 @@
 			if (user) {
 				// User is signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "none";
-				document.getElementById('#loginbtn').innerHTML = '<button type="submit" class="btn btn-danger" >Logout</button>'
+				document.getElementById('#loginbtn').textContent = 'logout'
 				var displayName = user.displayName;
 				var email = user.email;
 				var emailVerified = user.emailVerified;
@@ -53,13 +53,13 @@
 			} else {
 				// User is not signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "block";
-				document.getElementById('#loginbtn').innerHTML = ''
+				document.getElementById('#loginbtn').textContent = 'login'
 
-				document.getElementById('firebaseui-auth-container').innerHTML="";
+				document.getElementById('firebaseui-auth-container').innerHTML = "";
 				document.getElementById('sign-in-status').textContent = 'inativo';
 				document.getElementById('email').textContent = '---';
 				document.getElementById('estado').textContent = '---';
-		}
+			}
 		}, function (error) {
 			console.log(error);
 		});
@@ -73,14 +73,22 @@
 		<a class="navbar-brand" href="#">MNE PMO</a>
 		<ul class="nav navbar-nav">
 		</ul>
-		<ul class="nav navbar-nav navbar-right">             
+		<ul class="nav navbar-nav navbar-right">
 			<li id="#loginbtn" style="align-content:center">
+			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a id="#loginbtn" class="nav-link" href="" data-target="#myModal" data-toggle="modal"></a>
+				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
 			</li>
 		</ul>
 	</nav>
 
 	<div id="firebaseui-auth-container"></div>
-	<p><div id="loader">A carregar...</div></p>
+	<p>
+		<div id="loader">A carregar...</div>
+	</p>
 	<p>O estado de sessão é <span id="sign-in-status"></span>.</p>
 	<div id="sign-in"></div>
 	<p>Detalhes:</p>
