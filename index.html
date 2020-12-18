@@ -80,6 +80,14 @@
 	};
 
 	window.addEventListener('load', () => initApp());
+
+	function gotoGantts () {
+		if (document.getElementById('loginbtn').textContent = 'Login') {
+			alert('Please login.');
+		} else {
+			window.open('/retrieve.html');
+		}
+	}
 </script>
 
 <body>
@@ -89,13 +97,7 @@
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a class="nav-link" onclick="function x () {
-						if (document.getElementById('loginbtn').textContent = 'Login') {
-							alert('Please login.');
-						} else {
-							window.open('/retrieve.html');
-						}
-					}">Gantts</a>
+				<a class="nav-link" onclick="gotoGantts()">Gantts</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
