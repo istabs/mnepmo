@@ -93,7 +93,7 @@
 						if (document.getElementById('loginbtn').textContent = 'Login') {
 							alert('Please login.');
 						} else {
-							window.open('/retrieve.html');
+							location.href = '/retrieve.html';
 						}
 					}">Gantts</a>
 			</li>
@@ -117,7 +117,7 @@
 		<li>estado: <span id="estado"></span></li>
 	</ul>
 	<pre id="account-details"></pre>
-	<button onclick="location.href = 'retrieve.html';" autofocus>Continuar</button>
+	<button onclick="location.href = '/retrieve.html';" autofocus>Continuar</button>
 </body>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
