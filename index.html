@@ -33,10 +33,11 @@
 		switch (document.getElementById('loginbtn').textContent) {
 			case 'Logout':
 				firebase.auth().signOut();
-				document.getElementById('loginbtn').textContent = 'Login';
-				var ui = new firebaseui.auth.AuthUI(firebase.auth());
-				ui.start('#firebaseui-auth-container', uiConfig)
-				document.getElementById('loginbtn').textContent = 'Logout';
+				with(ui = new firebaseui.auth.AuthUI(firebase.auth())) {
+					document.getElementById('loginbtn').textContent = 'Login';
+					ui.start('#firebaseui-auth-container', uiConfig)
+					document.getElementById('loginbtn').textContent = 'Logout';
+				}
 				break;
 			case 'Login':
 			default:
@@ -94,7 +95,7 @@
 						} else {
 							window.open('/retrieve.html');
 						}
-					}" >Gantts</a>
+					}">Gantts</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
