@@ -35,8 +35,8 @@
 		firebase.auth().onAuthStateChanged(function (user) {
 			document.getElementById('loader').textContent = '';
 			if (user) {
-				document.getElementById('firebaseui-auth-container').style.display = "none";
 				// User is signed in.
+				document.getElementById('firebaseui-auth-container').style.display = "none";
 				var displayName = user.displayName;
 				var email = user.email;
 				var emailVerified = user.emailVerified;
@@ -50,6 +50,7 @@
 					document.getElementById('estado').textContent = emailVerified;
 				});
 			} else {
+				// User is not signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "block";
 				document.getElementById('firebaseui-auth-container').innerHTML="";
 				document.getElementById('sign-in-status').textContent = 'inativo';
