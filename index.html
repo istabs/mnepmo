@@ -37,6 +37,7 @@
 			if (user) {
 				// User is signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "none";
+				document.getElementById('loginbtn').innerHTML = '<button type="submit" class="btn btn-danger" >Logout</button>'
 				var displayName = user.displayName;
 				var email = user.email;
 				var emailVerified = user.emailVerified;
@@ -52,6 +53,8 @@
 			} else {
 				// User is not signed in.
 				document.getElementById('firebaseui-auth-container').style.display = "block";
+				document.getElementById('loginbtn').innerHTML = ''
+
 				document.getElementById('firebaseui-auth-container').innerHTML="";
 				document.getElementById('sign-in-status').textContent = 'inativo';
 				document.getElementById('email').textContent = '---';
@@ -68,11 +71,10 @@
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<a class="navbar-brand" href="#">MNE PMO</a>
-		<ul class="navbar-nav">
+		<ul class="nav navbar-nav">
 		</ul>
 		<ul class="nav navbar-nav navbar-right">             
-			<li style="align-content:center">
-				<button type="submit" class="btn btn-danger" >Logout</button>
+			<li id="#loginbtn" style="align-content:center">
 			</li>
 		</ul>
 	</nav>
