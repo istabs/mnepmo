@@ -3,7 +3,7 @@
 
 <head>
 	<title>
-		MNE-PMO Gantts
+		MNE-PMO
 	</title>
 
 	<link rel="shortcut icon" type="image/ico" href="favicon.ico">
@@ -35,6 +35,7 @@
 		firebase.auth().onAuthStateChanged(function (user) {
 			document.getElementById('loader').textContent = '';
 			if (user) {
+				document.getElementById('firebaseui-auth-container').style.display = "none";
 				// User is signed in.
 				var displayName = user.displayName;
 				var email = user.email;
@@ -49,6 +50,8 @@
 					document.getElementById('estado').textContent = emailVerified;
 				});
 			} else {
+				document.getElementById('firebaseui-auth-container').style.display = "block";
+				document.getElementById('firebaseui-auth-container').innerHTML="";
 				document.getElementById('sign-in-status').textContent = 'inativo';
 				document.getElementById('email').textContent = '---';
 				document.getElementById('estado').textContent = '---';
@@ -68,7 +71,6 @@
 		</ul>
 	</nav>
 
-	<h1>MNE-PMO</h1>
 	<div id="firebaseui-auth-container"></div>
 	<p><div id="loader">A carregar...</div></p>
 	<p>O estado de sessão é <span id="sign-in-status"></span>.</p>
