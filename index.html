@@ -33,6 +33,8 @@
 		if (document.getElementById('loginbtn').textContent === 'Logout'){
 			document.getElementById('loginbtn').textContent = 'Login';
 			firebase.auth().signOut();
+		} else {
+			ui.start('#firebaseui-auth-container', uiConfig);
 		}
 	}
 
@@ -61,7 +63,7 @@
 				});
 			} else {
 				// User is not signed in.
-				document.getElementById('firebaseui-auth-container').style.display = "block";
+				//document.getElementById('firebaseui-auth-container').style.display = "block";
 				document.getElementById('loginbtn').textContent = 'Login'
 
 				document.getElementById('firebaseui-auth-container').innerHTML = "";
