@@ -28,6 +28,14 @@
 	firebase.initializeApp(firebaseConfig);
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#firebaseui-auth-container', uiConfig)
+
+	function statusFlip() {
+		if (document.getElementById('loginbtn').textContent === 'Logout'){
+			document.getElementById('loginbtn').textContent = 'Login';
+			firebaseui.auth().signOut();
+		}
+	}
+
 </script>
 
 <script type="text/javascript">
@@ -79,7 +87,7 @@
 				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
 			</li>
 			<li class="nav-item">
-				<a id="#loginbtn" class="nav-link" href="" data-target="#myModal" data-toggle="modal"></a>
+				<a id="#loginbtn" class="nav-link" href="" data-target="#myModal" data-toggle="modal" onclick="flipStatus()"></a>
 			</li>
 		</ul>
 	</nav>
