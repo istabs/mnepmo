@@ -104,7 +104,6 @@ crossorigin="anonymous"></script>
 
 	function initApp() {
 		includeHTML();
-		toggle('login');
 		return;
 		document.getElementById('loginbtn').addEventListener('click', function () {
 			firebase.auth().signOut();
@@ -112,12 +111,11 @@ crossorigin="anonymous"></script>
 		});
 	}
 
-	var loginStatus = false;
-
 	window.addEventListener('load', initApp);
 
 	$(document).ready(function() {
 		$('#menu').load('menu.html');
+		toggle('login');
 	});
 
 </script>
