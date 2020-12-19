@@ -35,7 +35,6 @@
 	//firebase.auth().signOut();
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#firebaseui-auth-container', uiConfig)
-
 </script>
 
 <script type="text/javascript">
@@ -47,9 +46,8 @@
 				$("#logout").show();
 				break;
 			case 'logout':
-				$("#logout").hide();
-				break;
 			default:
+				$("#logout").hide();
 				break;
 		}
 	}
@@ -81,30 +79,20 @@
 		alert('Please login.');
 	}
 
-	window.addEventListener('load', function() {includeHTML();});
+	window.addEventListener('load', function () {
+		includeHTML();
+	});
 
 	$(document).ready(function () {
-		$('#menu').load('menu.html', function () {
+		$('#menu-container').load('menu.html', function () {
 			toggle('login');
 		});
 	});
 </script>
 
 <body>
-	<div id="menu"></div>
-
+	<div id="menu-container"></div>
 	<div id="firebaseui-auth-container"></div>
-	<p>
-		<div id="loader">A carregar...</div>
-	</p>
-	<div id="sign-in"></div>
-	<p>Detalhes:</p>
-	<ul>
-		<li>email: <span id="email"></span></li>
-		<li>estado: <span id="estado"></span></li>
-	</ul>
-	<pre id="account-details"></pre>
-	<button onclick="location.href = '/retrieve.html';" autofocus>Continuar</button>
 </body>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
