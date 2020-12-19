@@ -35,6 +35,7 @@
 	//firebase.auth().signOut();
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#firebaseui-auth-container', uiConfig)
+
 </script>
 
 <script type="text/javascript">
@@ -43,20 +44,14 @@
 	function toggle(menuItem) {
 		switch (menuItem) {
 			case 'login':
-				$("#login").hide();
 				$("#logout").show();
 				break;
 			case 'logout':
-				$("#login").hide();
 				$("#logout").hide();
 				break;
 			default:
 				break;
 		}
-	}
-
-	function doLogin() {
-		toggle('login');
 	}
 
 	function doLogout() {
@@ -86,11 +81,7 @@
 		alert('Please login.');
 	}
 
-	function initApp() {
-		includeHTML();
-	}
-
-	window.addEventListener('load', initApp);
+	window.addEventListener('load', function() {includeHTML();});
 
 	$(document).ready(function () {
 		$('#menu').load('menu.html', function () {
