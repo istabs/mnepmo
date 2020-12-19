@@ -219,7 +219,11 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
-				$('#noAccess').hide();
+				$('#noAccess').innerHTML(`
+					<div class="jumbotron jumbotron-fluid screenonly">
+						<h1>Sem permissão de acesso</h1>
+					</div>
+				`);
 				if (rawData.offset) {
 					let newUrl = url + '?offset=' + rawData.offset
 					$.ajax({
@@ -270,7 +274,7 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 				}
 			},
 			error: function(error) {
-				$('#noAccess').show()
+				$('#noAccess').innerHTML('');
 			}
 		})
 	})
