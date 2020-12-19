@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html ontouchmove >
+<html ontouchmove>
 
 <head>
 	<title>
@@ -36,6 +36,7 @@
 <script type="text/javascript" src="setup.js"></script>
 <script type="text/javascript" src="adapters.js"></script>
 <script type="text/javascript" src="presenter.js"></script>
+<script type="text/javascript" src="menuStuff.js"></script>
 
 <script type="text/javascript">
 	var baseUrl = ''
@@ -87,6 +88,14 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#" onclick="resetChart('ganttCharts')">Início</a>
 			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a id="logout" class="nav-link" onclick="doLogout()">Logout</a>
+			</li>
+			<!-- <li class="nav-item">
+				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
+			</li> -->
 		</ul>
 	</nav>
 

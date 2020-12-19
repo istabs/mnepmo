@@ -37,28 +37,7 @@
 	ui.start('#firebaseui-auth-container', uiConfig)
 </script>
 
-<script type="text/javascript">
-	// Menu stuff
-
-	function toggle(menuItem) {
-		switch (menuItem) {
-			case 'login':
-				$("#gantts").show();
-				$("#logout").show();
-				break;
-			case 'logout':
-			default:
-				$("#gantts").hide();
-				$("#logout").hide();
-				break;
-		}
-	}
-
-	function doLogout() {
-		firebase.auth().signOut();
-		toggle('logout');
-	}
-</script>
+<script type="text/javascript" src="menuStuff.js"></script>
 
 <script type="text/javascript">
 	function initApp() {
