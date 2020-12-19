@@ -104,18 +104,14 @@ crossorigin="anonymous"></script>
 
 	function initApp() {
 		includeHTML();
-		return;
-		document.getElementById('loginbtn').addEventListener('click', function () {
-			firebase.auth().signOut();
-			loginStatus = false;
-		});
 	}
 
 	window.addEventListener('load', initApp);
 
 	$(document).ready(function() {
-		$('#menu').load('menu.html');
-		toggle('login');
+		$('#menu').load('menu.html', function() {
+			toggle('login');
+		});
 	});
 
 </script>
