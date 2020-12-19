@@ -25,7 +25,9 @@ function mneAdapter(airtableData, presenter) {
 }
 
 // An AirTable table adapter for Google Charts
-function detailsAdapter(id, airtableData, presenter, options={chart_subtitle: 'chart_subtitle'}) {
+function detailsAdapter(id, airtableData, presenter, options = {
+	chart_subtitle: 'chart_subtitle'
+}) {
 	var rows = []
 	var classificacao = ""
 	var summary = ""
@@ -35,7 +37,7 @@ function detailsAdapter(id, airtableData, presenter, options={chart_subtitle: 'c
 		if (item.id === id) {
 			classificacao = item.fields["Classificação"];
 			if (item.fields && item.fields["Atividade"] && item.fields["Atividade"].includes(SUMARIO)) {
-				document.getElementById(options.chart_subtitle).textContent = item.fields["Atividade"].replace(SUMARIO,'');
+				document.getElementById(options.chart_subtitle).textContent = item.fields["Atividade"].replace(SUMARIO, '');
 				summary = item.id
 			}
 		}
@@ -136,7 +138,7 @@ function fbCache(stuff, ...params) {
 
 // An AirTable table adapter for Google Charts
 function execucaoAdapter(airtableData, presenter) {
-	fbCache(() => 
+	fbCache(() =>
 		$.ajax({
 			url: target.resourcesUrl,
 			beforeSend: function (xhr) {
@@ -147,32 +149,31 @@ function execucaoAdapter(airtableData, presenter) {
 				rawData.records.forEach(item => prr[item.id] = item.fields.Projeto);
 				var rows = []
 				airtableData.records
-							.sort((a, b) => Date.parse(a.fields.Inicio[0]) - Date.parse(b.fields.Inicio[0]))
-							.sort((a, b) => Date.parse(a.fields.Grupo) - Date.parse(b.fields.Grupo))
-							.forEach(item => {
-					var fim = new Date(item.fields["Fim"])
-					var preds = item.fields['Finish-Start'] ? item.fields['Finish-Start'][0] : null;
-					fim.setDate(fim.getDate() + 1)
-					rows.push([
-						item.id, // Task ID
-						item.fields["Projeto"], // Task Name
-						prr[item.fields["PRR"][0]], // Group (string)
-						new Date(item.fields["Inicio"]), // Start Date
-						fim, // End Date
-						null, // Duration (number)
-						0, // Percent Complete (number)
-						preds, // Dependencies (string / comma separated)
-					]);
-				});
+					.sort((a, b) => Date.parse(a.fields.Inicio[0]) - Date.parse(b.fields.Inicio[0]))
+					.sort((a, b) => Date.parse(a.fields.Grupo) - Date.parse(b.fields.Grupo))
+					.forEach(item => {
+						var fim = new Date(item.fields["Fim"])
+						var preds = item.fields['Finish-Start'] ? item.fields['Finish-Start'][0] : null;
+						fim.setDate(fim.getDate() + 1)
+						rows.push([
+							item.id, // Task ID
+							item.fields["Projeto"], // Task Name
+							prr[item.fields["PRR"][0]], // Group (string)
+							new Date(item.fields["Inicio"]), // Start Date
+							fim, // End Date
+							null, // Duration (number)
+							0, // Percent Complete (number)
+							preds, // Dependencies (string / comma separated)
+						]);
+					});
 				presenter(rows);
 			}
-		})
-	, airtableData, presentGantt)
+		}), airtableData, presentGantt)
 }
 
 // An AirTable table adapter for Google Charts
 function contratacaoAdapter(airtableData, presenter) {
-	fbCache(() => 
+	fbCache(() =>
 		$.ajax({
 			url: target.resourcesUrl,
 			beforeSend: function (xhr) {
@@ -198,11 +199,14 @@ function contratacaoAdapter(airtableData, presenter) {
 				});
 				presenter(rows);
 			}
-		})
-	, airtableData, presentGantt)
+		}), airtableData, presentGantt)
 }
 
-function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_title', chart_subtitle: 'chart_subtitle', }) {
+function resetChart(ganttTag, chrtOptions = {
+	chart: 'chart',
+	chart_title: 'chart_title',
+	chart_subtitle: 'chart_subtitle',
+}) {
 	fbCache(() => {
 
 		setMenu(ganttTag)
@@ -219,11 +223,7 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
-				$('#noAccess').innerHTML(`
-					<div class="jumbotron jumbotron-fluid screenonly">
-						<h1>Sem permissão de acesso</h1>
-					</div>
-				`);
+				$('#noAccess').innerHTML('');
 				if (rawData.offset) {
 					let newUrl = url + '?offset=' + rawData.offset
 					$.ajax({
@@ -232,8 +232,9 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 							xhr.setRequestHeader("Authorization", authorization)
 						},
 						success: function (rawData1) {
+							$('#noAccess').innerHTML('');
 							const HTML_POSITION = chrtOptions.chart;
-							
+
 							rawData1.records.forEach((record) => {
 								rawData.records.push(record)
 							})
@@ -241,39 +242,65 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 							var gantt = {
 								sortTasks: true,
 								criticalPathEnabled: false,
-								criticalPathStyle: { strokeWidth: 0, stroke: '#e64a19', },
-								arrow: { width: 0, radius: 10, length: 0, spaceAfter: -275, },
+								criticalPathStyle: {
+									strokeWidth: 0,
+									stroke: '#e64a19',
+								},
+								arrow: {
+									width: 0,
+									radius: 10,
+									length: 0,
+									spaceAfter: -275,
+								},
 							};
 							if (target.palette) gantt['palette'] = target.palette;
-			
-							var options = {gantt: gantt, height: target.height, width: 960, };
-			
+
+							var options = {
+								gantt: gantt,
+								height: target.height,
+								width: 960,
+							};
+
 							var presenter = _.partial(presentGantt, HTML_POSITION, options, rawData);
-							google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));	
+							google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));
 						}
 					})
 				} else {
-					$('#noAccess').on('shown.bs.modal', function () {
-						$('#myInput').trigger('focus')
-					})
+					$('#noAccess').innerHTML(`
+						<div class="jumbotron jumbotron-fluid screenonly">
+							<h1>Sem permissão de acesso</h1>
+						</div>
+					`);
 
 					const HTML_POSITION = chrtOptions.chart;
 
 					var gantt = {
 						sortTasks: true,
 						criticalPathEnabled: false,
-						criticalPathStyle: { strokeWidth: 0, stroke: '#e64a19', },
-						arrow: { width: 0, radius: 10, length: 0, spaceAfter: -275, },
+						criticalPathStyle: {
+							strokeWidth: 0,
+							stroke: '#e64a19',
+						},
+						arrow: {
+							width: 0,
+							radius: 10,
+							length: 0,
+							spaceAfter: -275,
+						},
 					};
 					if (target.palette) gantt['palette'] = target.palette;
-	
-					var options = {gantt: gantt, height: target.height, width: 960, };
-	
+
+					var options = {
+						gantt: gantt,
+						height: target.height,
+						width: 960,
+					};
+
 					var presenter = _.partial(presentGantt, HTML_POSITION, options, rawData);
-					google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));	
+					google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));
 				}
 			},
-			error: function(error) {
+			error: function (error) {
 				$('#noAccess').innerHTML('');
 			}
 		})
