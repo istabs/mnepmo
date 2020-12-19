@@ -1,9 +1,9 @@
 $.fn.setAccess = function () {
-	$('#noAccess').innerHTML('');
+	$('#noAccess').html();
 };
 
 $.fn.setNoAccess = function () {
-	$('#noAccess').innerHTML(`
+	$('#noAccess').html(`
 		<div class="jumbotron jumbotron-fluid screenonly">
 			<h1>Sem permissão de acesso</h1>
 		</div>
