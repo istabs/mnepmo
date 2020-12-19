@@ -219,6 +219,7 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
+				$('#noAccess').show()
 				if (rawData.offset) {
 					let newUrl = url + '?offset=' + rawData.offset
 					$.ajax({
@@ -267,6 +268,9 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 					var presenter = _.partial(presentGantt, HTML_POSITION, options, rawData);
 					google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));	
 				}
+			},
+			error: function(error) {
+				$('#noAccess').show()
 			}
 		})
 	})
