@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	firebase.initializeApp(firebaseConfig);
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
-	ui.start('#firebaseui-auth-container', firebaseUiConfig)
+	ui.start(#firebaseui-auth-container, firebaseUiConfig)
 </script>
 
 <script type="text/javascript">
@@ -42,9 +42,9 @@
 	var alreadyRendered = false;
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
-			if (ui.isPending()) {
+			if (ui.isPendingRedirect()) {
 				if (! alreadyRendered)
-					ui.start(firebaseUiConfig);
+					ui.start('#firebaseui-auth-container', firebaseUiConfig);
 				return;
 			}
 			if (user) {
@@ -52,8 +52,8 @@
 				ui.reset();
 			} else {
 				setLoginStatus('logout');
-				ui.start(firebaseUiConfig);
-				alreadyRendered = true;
+				ui.start('#firebaseui-auth-container', firebaseUiConfig);
+				alreadyRendered = tre;
 			}
 		}, (error)=>console.log(error));
 	};
