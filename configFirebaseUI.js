@@ -1,4 +1,4 @@
-var uiConfig = {
+const firebaseUiConfig = {
 	signInSuccessUrl: 'pmo.html',
 	signInOptions: [
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID,
