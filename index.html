@@ -83,12 +83,13 @@
 		alert('Please login.');
 	}
 
-	window.addEventListener('load', function () {
-		includeHTML();
-	});
+//	window.addEventListener('load', function () {
+//		includeHTML();
+//	});
 
 	$(document).ready(function () {
 		$('#menu-container').load('menu.html', function () {
+			includeHTML();
 			toggle('login');
 		});
 	});
