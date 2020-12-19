@@ -42,10 +42,13 @@
 	var alreadyRendered = false;
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
-			if (user) {
-				setLoginStatus('login');
+			if (ui.isPending()) {
 				if (! alreadyRendered)
 					ui.start(firebaseUiConfig);
+				return;
+			}
+			if (user) {
+				setLoginStatus('login');
 				ui.reset();
 			} else {
 				setLoginStatus('logout');
