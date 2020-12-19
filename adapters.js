@@ -301,7 +301,11 @@ function resetChart(ganttTag, chrtOptions = {
 				}
 			},
 			error: function (error) {
-				$('#noAccess').innerHTML('');
+				$('#noAccess').innerHTML(`
+					<div class="jumbotron jumbotron-fluid screenonly">
+						<h1>Sem permissão de acesso</h1>
+					</div>
+				`);
 			}
 		})
 	})
