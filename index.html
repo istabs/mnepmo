@@ -31,11 +31,6 @@
 			case 'login': $("#gantts").show(); $("#logout").show(); break;
 			case 'logout': default: $("#gantts").hide(); $("#logout").hide(); break;
 	}	}
-	function doLogout() {
-		firebase.auth().signOut();
-		//setLoginStatus('logout');
-		window.open('/', '_self');
-	}
 </script>
 
 <script type="text/javascript">
@@ -71,11 +66,6 @@
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a id="logout" class="nav-link" onclick="doLogout()">Logout</a>
-			</li>
-			<!-- <li class="nav-item">
-				<a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
-			</li> -->
 		</ul>
 	</nav>
 	<div id="firebaseui-auth-container"></div>
