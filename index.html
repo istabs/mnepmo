@@ -2,17 +2,13 @@
 <html>
 
 <head>
-	<title>
-		MNE-PMO
-	</title>
+	<title>MNE-PMO</title>
 
 	<link rel="shortcut icon" type="image/ico" href="favicon.ico">
-	<link type="text/css" rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	<link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css">
 	<link type="text/css" rel="stylesheet" href="styles.css">
-
 </head>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -20,20 +16,27 @@
 <script type="text/javascript" src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
-
 <script type="text/javascript" src="configFirebase.js"></script>
 <script type="text/javascript" src="configFirebaseUI.js"></script>
 
 <script type="text/javascript">
-	// Initialization
-
 	firebase.initializeApp(firebaseConfig);
-	//firebase.auth().signOut();
 	var ui = new firebaseui.auth.AuthUI(firebase.auth());
 	ui.start('#firebaseui-auth-container', firebaseUiConfig)
 </script>
 
-<script type="text/javascript" src="menuStuff.js"></script>
+<script type="text/javascript">
+	function setLoginStatus(menuItem) {
+		switch (menuItem) {
+			case 'login': $("#gantts").show(); $("#logout").show(); break;
+			case 'logout': default: $("#gantts").hide(); $("#logout").hide(); break;
+	}	}
+	function doLogout() {
+		firebase.auth().signOut();
+		//setLoginStatus('logout');
+		window.open('/', '_self');
+	}
+</script>
 
 <script type="text/javascript">
 	function initApp() {
@@ -41,15 +44,10 @@
 			if (user) {
 				setLoginStatus('login');
 				ui.reset();
-			} else {
-				setLoginStatus('logout');
-			}
+			} else setLoginStatus('logout');
 			ui.start(firebaseUiConfig);
-		}, function (error) {
-			console.log(error);
-		});
+		}, (error)=>console.log(error));
 	};
-
 	$(document).ready(()=>initApp());
 </script>
 
