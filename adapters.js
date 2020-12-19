@@ -315,9 +315,6 @@ function resetChart(ganttTag, chrtOptions = {
 					var presenter = _.partial(presentGantt, HTML_POSITION, options, rawData);
 					google.charts.setOnLoadCallback(() => googleChartAirtableAdapt(rawData, target.adapt, presenter));
 				}
-			},
-			error: function (error) {
-				$('#noAccess').setNoAccess();
 			}
 		})
 	})
