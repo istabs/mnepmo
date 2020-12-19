@@ -39,13 +39,18 @@
 </script>
 
 <script type="text/javascript">
+	var alreadyRendered = false;
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
 				setLoginStatus('login');
-				ui.reset();
-			} else setLoginStatus('logout');
-			ui.start(firebaseUiConfig);
+				if (! alreadyRendered) ui.start(firebaseUiConfig);
+				else ui.reset();
+			} else {
+				setLoginStatus('logout');
+				ui.start(firebaseUiConfig);
+				alreadyRendered = true;
+			}
 		}, (error)=>console.log(error));
 	};
 	$(document).ready(()=>initApp());
