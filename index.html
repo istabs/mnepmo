@@ -43,10 +43,10 @@
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				toggle('logout');
+				setLoginStatus('login');
 				ui.reset();
 			} else {
-				toggle('login');
+				setLoginStatus('logout');
 			}
 			ui.start(uiConfig);
 		}, function (error) {

@@ -1,6 +1,6 @@
 // Menu stuff
 
-function toggle(menuItem) {
+function setLoginStatus(menuItem) {
 	switch (menuItem) {
 		case 'login':
 			$("#gantts").show();
@@ -16,6 +16,6 @@ function toggle(menuItem) {
 
 function doLogout() {
 	firebase.auth().signOut();
-	toggle('logout');
+	setLoginStatus('logout');
 	window.open('/', '_self');
 }
