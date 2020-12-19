@@ -44,8 +44,9 @@
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
 				setLoginStatus('login');
-				if (! alreadyRendered) ui.start(firebaseUiConfig);
-				else ui.reset();
+				if (! alreadyRendered)
+					ui.start(firebaseUiConfig);
+				ui.reset();
 			} else {
 				setLoginStatus('logout');
 				ui.start(firebaseUiConfig);
