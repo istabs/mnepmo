@@ -56,9 +56,7 @@
 
 	$(document).ready(function () {
 		$('#menu-container').load('menu.html', function () {
-			let user = firebase.auth().currentUser;
-			let user2 = firebase.auth().user;
-			toggle(firebase.auth().currentUser?'login':'logout');
+			initApp();
 		});
 	});
 </script>
