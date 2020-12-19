@@ -219,7 +219,7 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
-				$('#noAccess').show()
+				$('#noAccess').hide();
 				if (rawData.offset) {
 					let newUrl = url + '?offset=' + rawData.offset
 					$.ajax({
