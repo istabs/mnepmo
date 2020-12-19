@@ -64,11 +64,9 @@
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				// User is signed in.
 				toggle('logout');
 				ui.reset();
 			} else {
-				// User is not signed in.
 				toggle('login');
 			}
 			ui.start(uiConfig);
@@ -77,21 +75,8 @@
 		});
 	};
 
-	function gotoGantts() {
-		if (loginStatus === true) {
-			window.open('/pmo.html', '_self');
-			return;
-		}
-		alert('Please login.');
-	}
-
-	//	window.addEventListener('load', function () {
-	//		includeHTML();
-	//	});
-
 	$(document).ready(function () {
 		$('#menu-container').load('menu.html', function () {
-			//includeHTML();
 			toggle('login');
 		});
 	});

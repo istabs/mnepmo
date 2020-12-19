@@ -124,7 +124,7 @@ function fbCache(stuff, ...params) {
 	if (firebaseRead) {
 		stuff(params);
 	} else {
-		var dbRef = firebase.database().ref("/mne-pmo");
+		var dbRef = firebase.database().ref("mne-pmo");
 		dbRef.once('value', snap => {
 			firebaseRead = true;
 			authorization = snap.child('data').child('authorization').val();
