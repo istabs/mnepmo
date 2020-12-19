@@ -252,7 +252,7 @@ function resetChart(ganttTag, chrtOptions = {
 							xhr.setRequestHeader("Authorization", authorization)
 						},
 						success: function (rawData1) {
-							$('#noAccess').setNoAccess();
+							$('#noAccess').setAccess();
 							const HTML_POSITION = chrtOptions.chart;
 
 							rawData1.records.forEach((record) => {
@@ -286,7 +286,7 @@ function resetChart(ganttTag, chrtOptions = {
 						}
 					})
 				} else {
-					$('#noAccess').setNoAccess();
+					//$('#noAccess').setNoAccess();
 
 					const HTML_POSITION = chrtOptions.chart;
 
