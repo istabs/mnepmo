@@ -1,3 +1,16 @@
+JQuery.fn.extend({
+	setAccess: function() {
+		$('#noAccess').innerHTML('');
+	},
+	setNoAccess: function() {
+		$('#noAccess').innerHTML(`
+			<div class="jumbotron jumbotron-fluid screenonly">
+				<h1>Sem permissão de acesso</h1>
+			</div>
+		`);
+	},
+})
+
 // An AirTable table adapter for Google Charts
 function mneAdapter(airtableData, presenter) {
 	var rows = []
@@ -145,6 +158,7 @@ function execucaoAdapter(airtableData, presenter) {
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
+				$('#noAccess').setAccess();
 				prr = {};
 				rawData.records.forEach(item => prr[item.id] = item.fields.Projeto);
 				var rows = []
@@ -167,6 +181,9 @@ function execucaoAdapter(airtableData, presenter) {
 						]);
 					});
 				presenter(rows);
+			},
+			error: function (error) {
+				$('#noAccess').setNoAccess();
 			}
 		}), airtableData, presentGantt)
 }
@@ -180,6 +197,7 @@ function contratacaoAdapter(airtableData, presenter) {
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
+				$('#noAccess').setAccess();
 				resources = {};
 				rawData.records.forEach(item => resources[item.id] = item.fields.Procedimento);
 				var rows = []
@@ -198,6 +216,9 @@ function contratacaoAdapter(airtableData, presenter) {
 					]);
 				});
 				presenter(rows);
+			},
+			error: function (error) {
+				$('#noAccess').setNoAccess();
 			}
 		}), airtableData, presentGantt)
 }
@@ -223,7 +244,7 @@ function resetChart(ganttTag, chrtOptions = {
 				xhr.setRequestHeader("Authorization", authorization)
 			},
 			success: function (rawData) {
-				$('#noAccess').innerHTML('');
+				$('#noAccess').setAccess();
 				if (rawData.offset) {
 					let newUrl = url + '?offset=' + rawData.offset
 					$.ajax({
@@ -232,7 +253,7 @@ function resetChart(ganttTag, chrtOptions = {
 							xhr.setRequestHeader("Authorization", authorization)
 						},
 						success: function (rawData1) {
-							$('#noAccess').innerHTML('');
+							$('#noAccess').setNoAccess();
 							const HTML_POSITION = chrtOptions.chart;
 
 							rawData1.records.forEach((record) => {
@@ -266,11 +287,7 @@ function resetChart(ganttTag, chrtOptions = {
 						}
 					})
 				} else {
-					$('#noAccess').innerHTML(`
-						<div class="jumbotron jumbotron-fluid screenonly">
-							<h1>Sem permissão de acesso</h1>
-						</div>
-					`);
+					$('#noAccess').setNoAccess();
 
 					const HTML_POSITION = chrtOptions.chart;
 
@@ -301,11 +318,7 @@ function resetChart(ganttTag, chrtOptions = {
 				}
 			},
 			error: function (error) {
-				$('#noAccess').innerHTML(`
-					<div class="jumbotron jumbotron-fluid screenonly">
-						<h1>Sem permissão de acesso</h1>
-					</div>
-				`);
+				$('#noAccess').setNoAccess();
 			}
 		})
 	})
