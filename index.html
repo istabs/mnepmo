@@ -53,7 +53,7 @@
 			} else {
 				setLoginStatus('logout');
 				ui.start('#firebaseui-auth-container', firebaseUiConfig);
-				alreadyRendered = tre;
+				alreadyRendered = true;
 			}
 		}, (error)=>console.log(error));
 	};
