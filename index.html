@@ -60,16 +60,20 @@
 
 <script type="text/javascript">
 	function initApp() {
-		if (user) {
-			// User is signed in.
-			toggle('logout');
-			ui.reset();
-		} else {
-			// User is not signed in.
-			toggle('login');
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// User is signed in.
+				toggle('logout');
+				ui.reset();
+			} else {
+				// User is not signed in.
+				toggle('login');
+			}
 			ui.start(uiConfig);
-		}
-	}
+		}, function (error) {
+			console.log(error);
+		});
+	};
 
 	function gotoGantts() {
 		if (loginStatus === true) {
