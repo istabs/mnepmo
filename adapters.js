@@ -1,15 +1,14 @@
-JQuery.fn.extend({
-	setAccess: function() {
-		$('#noAccess').innerHTML('');
-	},
-	setNoAccess: function() {
-		$('#noAccess').innerHTML(`
-			<div class="jumbotron jumbotron-fluid screenonly">
-				<h1>Sem permissão de acesso</h1>
-			</div>
-		`);
-	},
-})
+$.fn.setAccess = function () {
+	$('#noAccess').innerHTML('');
+};
+
+$.fn.setNoAccess = function () {
+	$('#noAccess').innerHTML(`
+		<div class="jumbotron jumbotron-fluid screenonly">
+			<h1>Sem permissão de acesso</h1>
+		</div>
+	`);
+};
 
 // An AirTable table adapter for Google Charts
 function mneAdapter(airtableData, presenter) {
