@@ -47,9 +47,8 @@
 				$("#logout").show();
 				break;
 			case 'logout':
-				$("#login").show();
+				$("#login").hide();
 				$("#logout").hide();
-				firebase.auth().signOut();
 				break;
 			default:
 				break;
@@ -57,43 +56,28 @@
 	}
 
 	function doLogin() {
-		console.log('login');
 		toggle('login');
 	}
 
 	function doLogout() {
-		console.log('logout')
+		firebase.auth().signOut();
 		toggle('logout');
 	}
 </script>
 
 <script type="text/javascript">
-	function initApp_old() {
-		firebase.auth().signOut();
-		document.getElementById('loader').textContent = '';
+	function initApp() {
 		if (user) {
 			// User is signed in.
 			toggle('logout');
-			var displayName = user.displayName;
-			var email = user.email;
-			var emailVerified = user.emailVerified;
-			var photoURL = user.photoURL;
-			var uid = user.uid;
-			var phoneNumber = user.phoneNumber;
-			var providerData = user.providerData;
-			user.getIdToken().then(function (accessToken) {
-				document.getElementById('email').textContent = email;
-				document.getElementById('estado').textContent = emailVerified;
-			});
+			ui.reset();
 		} else {
 			// User is not signed in.
 			toggle('login');
-			document.getElementById('loginbtn').textContent = uiLabels.login;
-			document.getElementById('email').textContent = '---';
-			document.getElementById('estado').textContent = '---';
+			ui.start(uiConfig);
 		}
 	}
-	
+
 	function gotoGantts() {
 		if (loginStatus === true) {
 			window.open('/retrieve.html');
