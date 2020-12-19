@@ -17,4 +17,5 @@ function toggle(menuItem) {
 function doLogout() {
 	firebase.auth().signOut();
 	toggle('logout');
+	window.open('/', '_self');
 }
