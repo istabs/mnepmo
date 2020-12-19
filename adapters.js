@@ -248,6 +248,10 @@ function resetChart(ganttTag, chrtOptions={chart: 'chart', chart_title: 'chart_t
 						}
 					})
 				} else {
+					$('#noAccess').on('shown.bs.modal', function () {
+						$('#myInput').trigger('focus')
+					})
+
 					const HTML_POSITION = chrtOptions.chart;
 
 					var gantt = {
