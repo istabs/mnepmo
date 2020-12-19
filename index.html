@@ -43,10 +43,12 @@
 	function toggle(menuItem) {
 		switch (menuItem) {
 			case 'login':
+				$("#gantts").show();
 				$("#logout").show();
 				break;
 			case 'logout':
 			default:
+				$("#gantts").hide();
 				$("#logout").hide();
 				break;
 		}
@@ -83,9 +85,9 @@
 		alert('Please login.');
 	}
 
-//	window.addEventListener('load', function () {
-//		includeHTML();
-//	});
+	//	window.addEventListener('load', function () {
+	//		includeHTML();
+	//	});
 
 	$(document).ready(function () {
 		$('#menu-container').load('menu.html', function () {
