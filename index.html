@@ -45,11 +45,11 @@
 	function initApp() {
 		firebase.auth().onAuthStateChanged(function (user) {
 			console.log(user)
-			if (ui.isPendingRedirect()) {
-				if (! alreadyRendered)
-					ui.start('#firebaseui-auth-container', firebaseUiConfig);
-				return;
-			}
+//			if (ui.isPendingRedirect()) {
+//				if (! alreadyRendered)
+//					ui.start('#firebaseui-auth-container', firebaseUiConfig);
+//				return;
+//			}
 			if (user) {
 				setLoginStatus('login');
 				ui.reset();
